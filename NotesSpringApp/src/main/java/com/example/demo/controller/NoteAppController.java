@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.NoteTable;
 import com.example.demo.model.UserTable;
+import com.example.demo.model.HashFunction;
 import com.example.demo.repository.UserTableDao;
 
 @Controller
@@ -40,8 +42,9 @@ public class NoteAppController {
 	}
 	
 	@RequestMapping("/addUser")
-	public String createUser(UserTable user) {
+	public String createUser(UserTable user) throws NoSuchAlgorithmException {
 		if(!userDao.existsByUsername(user.getUsername())) {
+			user.setPassword(HashFunction.getHashString(user.getPassword()));
 			userDao.save(user);
 			userList.add(user);
 			System.out.println("Success");

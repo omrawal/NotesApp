@@ -1,4 +1,5 @@
 package com.example.demo.model;
+import java.security.NoSuchAlgorithmException;
 
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,8 @@ public class UserTable {
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password) throws NoSuchAlgorithmException {
+		this.password = (password);
 	}
 	@Override
 	public String toString() {
