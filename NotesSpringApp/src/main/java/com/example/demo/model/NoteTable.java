@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-//@Entity
+
 //@Component
+@Entity(name="note_table")
 public class NoteTable {
-//	@Id
+	@Id
 	private int note_id=111;
-//	@Autowired
-	private UserTable note_owner;
+	private String note_owner;
 	private String note_title="no_title";
 	private String note_description="no_description";
 	public int getNote_id() {
@@ -21,10 +21,10 @@ public class NoteTable {
 	public void setNote_id(int note_id) {
 		this.note_id = note_id;
 	}
-	public UserTable getNote_owner() {
+	public String getNote_owner() {
 		return note_owner;
 	}
-	public void setNote_owner(UserTable note_owner) {
+	public void setNote_owner(String note_owner) {
 		this.note_owner = note_owner;
 	}
 	public String getNote_title() {

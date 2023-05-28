@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.model.NoteTable;
 import com.example.demo.model.UserTable;
 import com.example.demo.model.HashFunction;
+import com.example.demo.repository.NoteTableDao;
 import com.example.demo.repository.UserTableDao;
 
 @Controller
@@ -19,6 +20,9 @@ public class NoteAppController {
 	
 	@Autowired
 	UserTableDao userDao;
+	
+	@Autowired
+	NoteTableDao noteDao;
 	
 	int min_range=1,max_range=999;
 	public List<NoteTable> noteList=new ArrayList<>();
@@ -37,7 +41,7 @@ public class NoteAppController {
 	@RequestMapping("/getNote")
 	@ResponseBody
 	public String notepage() {
-		return noteList.toString();
+		return noteDao.findAll().toString();
 	}
 	
 	@RequestMapping("/addUser")
@@ -57,20 +61,22 @@ public class NoteAppController {
 	
 	@RequestMapping("/addNote")
 	@ResponseBody()
-	public String createNote(@RequestParam(name="note_title") String note_title,
-			@RequestParam()String note_description,@RequestParam()String note_owner) {
-
-		NoteTable newNote=new NoteTable();
-		newNote.setNote_id((int)(Math.random() * (max_range - min_range + 1) + min_range));
-		newNote.setNote_description(note_description);
-		newNote.setNote_title(note_title);
-		UserTable user=userDao.getByUsername(note_owner);
-		if(user==null) {
-			return "User '"+note_owner+"' does not exist";
+	public String createNote(NoteTable note) {
+		System.out.println("->>>>>>"+note);
+		if(!userDao.existsByUsername(note.getNote_owner())) {
+			return("User by Username '"+note.getNote_owner()+"' Not Found");
 		}
-		newNote.setNote_owner(user);
-		noteList.add(newNote);
-		return "Note Added Successfully";
+		else {
+			int note_id=note.getNote_id();
+			while(noteDao.existsById(note_id)) {
+				note_id=((int)(Math.random() * (max_range - min_range + 1) + min_range));
+			}
+			note.setNote_id(note_id);
+			System.out.println(note);
+			noteDao.save(note);
+			return "Note Added Successfully";
+		}
+		
 	}
 	
 	
