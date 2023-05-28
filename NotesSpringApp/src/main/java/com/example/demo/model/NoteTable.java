@@ -7,14 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 //@Entity
-@Component
+//@Component
 public class NoteTable {
 //	@Id
 	private int note_id=111;
-	@Autowired
+//	@Autowired
 	private UserTable note_owner;
-	private String note_title="NewTitle";
-	private String note_description="NewDescription";
+	private String note_title="no_title";
+	private String note_description="no_description";
 	public int getNote_id() {
 		return note_id;
 	}

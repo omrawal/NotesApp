@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-//@Entity
-@Component
+@Entity(name = "user_table")
+//@Component
 public class UserTable {
-//	@Id
-	private String username="abc";
-	private String password="def";
+	@Id
+	private String username;
+	private String password;
 	public String getUsername() {
 		return username;
 	}

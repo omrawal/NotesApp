@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,9 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.NoteTable;
 import com.example.demo.model.UserTable;
+import com.example.demo.repository.UserTableDao;
 
 @Controller
 public class NoteAppController {
+	
+	@Autowired
+	UserTableDao userDao;
 	
 	int min_range=1,max_range=999;
 	public List<UserTable> userList=new ArrayList<>();
@@ -36,7 +41,15 @@ public class NoteAppController {
 	
 	@RequestMapping("/addUser")
 	public String createUser(UserTable user) {
-		userList.add(user);
+		if(!userDao.existsByUsername(user.getUsername())) {
+			userDao.save(user);
+			userList.add(user);
+			System.out.println("Success");
+		}
+		else {
+			System.out.println("Username '"+user.getUsername()+"' Not unique");
+		}
+		
 		return "index.jsp";
 	}
 	
