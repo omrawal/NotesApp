@@ -21,7 +21,6 @@ public class NoteAppController {
 	UserTableDao userDao;
 	
 	int min_range=1,max_range=999;
-	public List<UserTable> userList=new ArrayList<>();
 	public List<NoteTable> noteList=new ArrayList<>();
 	
 	@RequestMapping("/")
@@ -32,7 +31,7 @@ public class NoteAppController {
 	@RequestMapping("/getUser")
 	@ResponseBody
 	public String userpage() {
-		return userList.toString();
+		return userDao.findAll().toString();
 	}
 	
 	@RequestMapping("/getNote")
@@ -46,7 +45,6 @@ public class NoteAppController {
 		if(!userDao.existsByUsername(user.getUsername())) {
 			user.setPassword(HashFunction.getHashString(user.getPassword()));
 			userDao.save(user);
-			userList.add(user);
 			System.out.println("Success");
 		}
 		else {
@@ -56,14 +54,6 @@ public class NoteAppController {
 		return "index.jsp";
 	}
 	
-	private UserTable getNoteUserIfExist(String username) {
-		for(UserTable user:userList) {
-			if(user.getUsername().equals(username)) {
-				return user;
-			}
-		}
-		return null;
-	}
 	
 	@RequestMapping("/addNote")
 	@ResponseBody()
@@ -74,7 +64,7 @@ public class NoteAppController {
 		newNote.setNote_id((int)(Math.random() * (max_range - min_range + 1) + min_range));
 		newNote.setNote_description(note_description);
 		newNote.setNote_title(note_title);
-		UserTable user=getNoteUserIfExist(note_owner);
+		UserTable user=userDao.getByUsername(note_owner);
 		if(user==null) {
 			return "User '"+note_owner+"' does not exist";
 		}
