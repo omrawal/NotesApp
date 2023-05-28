@@ -1,0 +1,29 @@
+
+SQL> desc  user_table;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USERNAME                                  NOT NULL VARCHAR2(32)
+ PASSWORD                                           VARCHAR2(64)
+
+SQL> desc  note_table;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NOTE_ID                                   NOT NULL NUMBER(38)
+ NOTE_TITLE                                         VARCHAR2(200)
+ NOTE_DESCRIPTION                                   VARCHAR2(500)
+ NOTE_OWNER                                         VARCHAR2(32)
+
+CREATE TABLE user_table (
+    USERNAME VARCHAR(32) primary key,
+    PASSWORD VARCHAR(64)
+);
+
+
+CREATE TABLE note_table (
+    NOTE_ID int primary key,
+    NOTE_TITLE VARCHAR(200),
+    NOTE_DESCRIPTION VARCHAR(500),
+    NOTE_OWNER VARCHAR(32),
+    CONSTRAINT FK_note_user FOREIGN KEY (NOTE_OWNER)
+    REFERENCES user_table(USERNAME)
+);
