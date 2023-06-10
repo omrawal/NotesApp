@@ -1,4 +1,5 @@
 package com.example.demo.model;
+import com.example.demo.model.HashFunction;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class UserTable {
 		return password;
 	}
 	public void setPassword(String password) throws NoSuchAlgorithmException {
-		this.password = (password);
+		this.password = HashFunction.getHashString(password);
 	}
 	@Override
 	public String toString() {

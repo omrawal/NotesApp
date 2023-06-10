@@ -41,6 +41,18 @@
         <button type="reset">RESET</button>
     </form>
     <hr>
+    <h2>Add new user here(using rest api)</h2>
+    <form method="post" action="create_user">
+        <label>Username:</label>
+        <input type="text" name="username">
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password">
+        <br>
+        <button type="submit">SUBMIT</button>
+        <button type="reset">RESET</button>
+    </form>
+    <hr>
 </body>
 
 </html>

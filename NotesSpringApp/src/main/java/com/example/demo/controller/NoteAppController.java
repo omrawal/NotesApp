@@ -47,7 +47,7 @@ public class NoteAppController {
 	@RequestMapping("/addUser")
 	public String createUser(UserTable user) throws NoSuchAlgorithmException {
 		if(!userDao.existsByUsername(user.getUsername())) {
-			user.setPassword(HashFunction.getHashString(user.getPassword()));
+//			user.setPassword(HashFunction.getHashString(user.getPassword()));
 			userDao.save(user);
 			System.out.println("Success");
 		}
