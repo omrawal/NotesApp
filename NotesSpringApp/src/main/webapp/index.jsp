@@ -10,7 +10,7 @@
 
 <body>
     <h1>Welcome to notes app</h1>
-    <h2>View user list <a href="/getUser">here</a></h2>
+    <h2>View user list <a href="/getAllUsers">here</a></h2>
     <hr>
     <h2>Add new user here</h2>
     <form action="addUser">
@@ -24,7 +24,7 @@
         <button type="reset">RESET</button>
     </form>
     <hr>
-    <h2>View note list <a href="/getNote">here</a></h2>
+    <h2>View note list <a href="/getAllNotes">here</a></h2>
     <hr>
     <h2>Add new note here</h2>
     <form action="addNote">
@@ -48,6 +48,21 @@
         <br>
         <label>Password:</label>
         <input type="password" name="password">
+        <br>
+        <button type="submit">SUBMIT</button>
+        <button type="reset">RESET</button>
+    </form>
+    <hr>
+    <h2>Add new note here(using rest api)</h2>
+    <form method="post" action="create_note">
+        <label>Note Owner:</label>
+        <input type="text" name="note_owner">
+        <br>
+        <label>Title:</label>
+        <input type="text" name="note_title">
+        <br>
+        <label>Description:</label>
+        <input type="text" name="note_description">
         <br>
         <button type="submit">SUBMIT</button>
         <button type="reset">RESET</button>

@@ -5,6 +5,9 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,6 +79,26 @@ public class NoteAppController {
 			noteDao.save(note);
 			return "Note Added Successfully";
 		}
+		
+	}
+	@RequestMapping("/editnote")
+	public String editNotePage(@RequestParam("noteId") int noteId,Model model) {
+		
+		// use request param
+		
+		System.out.println("->>>>>>"+noteId);
+		String responseString="No user found";
+		if(noteDao.existsById(noteId)) {
+			responseString=noteDao.getById(noteId).toString();
+			System.out.println("The note is "+responseString);
+			model.addAttribute("noteObject", noteDao.getById(noteId));
+			return "editnote.jsp";
+		}
+		else{
+			System.out.println("Note not found");
+			return "editnote.jsp";
+		}
+		
 		
 	}
 
