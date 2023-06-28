@@ -57,7 +57,6 @@ public class NoteAppController {
 		else {
 			System.out.println("Username '"+user.getUsername()+"' Not unique");
 		}
-		
 		return "index.jsp";
 	}
 	
@@ -65,7 +64,6 @@ public class NoteAppController {
 	@RequestMapping("/addNote")
 	@ResponseBody()
 	public String createNote(NoteTable note) {
-		System.out.println("->>>>>>"+note);
 		if(!userDao.existsByUsername(note.getNote_owner())) {
 			return("User by Username '"+note.getNote_owner()+"' Not Found");
 		}
@@ -78,8 +76,7 @@ public class NoteAppController {
 			System.out.println(note);
 			noteDao.save(note);
 			return "Note Added Successfully";
-		}
-		
+		}		
 	}
 	@RequestMapping("/editnote")
 	public String editNotePage(@RequestParam("noteId") int noteId,Model model) {
