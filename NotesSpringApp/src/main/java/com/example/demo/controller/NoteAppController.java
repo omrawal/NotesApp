@@ -43,8 +43,10 @@ public class NoteAppController {
 	
 	@RequestMapping("/getNote")
 	@ResponseBody
-	public String notepage() {
-		return noteDao.findAll().toString();
+	public List<NoteTable> notepage(Model model) {
+//		model.addAttribute("notes", noteDao.findAll());
+//		return "note_list.jsp";
+		return noteDao.findAll();
 	}
 	
 	@RequestMapping("/addUser")
