@@ -13,10 +13,10 @@
     <h2>Edit note here</h2>
     <form action="addNote">
         <label>Note id:</label>
-        <input type="text" name="note_id" value=${noteObject.getNote_id()} disabled>
+        <input type="text" name="note_id" value=${noteObject.getNote_id()}>
         <br>
         <label>Note Owner:</label>
-        <input type="text" name="note_owner" value=${noteObject.getNote_owner()} disabled>
+        <input type="text" name="note_owner" value=${noteObject.getNote_owner()}>
         <br>
         <label>Title:</label>
         <input type="text" name="note_title" value=${noteObject.getNote_title()}>

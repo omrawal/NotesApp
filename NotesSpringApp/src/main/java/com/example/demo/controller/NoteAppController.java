@@ -66,14 +66,15 @@ public class NoteAppController {
 	@RequestMapping("/addNote")
 	@ResponseBody()
 	public String createNote(NoteTable note) {
+		System.out.println("Add note note is "+note);
 		if(!userDao.existsByUsername(note.getNote_owner())) {
 			return("User by Username '"+note.getNote_owner()+"' Not Found");
 		}
 		else {
 			int note_id=note.getNote_id();
-			while(noteDao.existsById(note_id)) {
-				note_id=((int)(Math.random() * (max_range - min_range + 1) + min_range));
-			}
+//			while(noteDao.existsById(note_id)) {
+//				note_id=((int)(Math.random() * (max_range - min_range + 1) + min_range));
+//			}
 			note.setNote_id(note_id);
 			System.out.println(note);
 			noteDao.save(note);

@@ -68,6 +68,15 @@
         <button type="reset">RESET</button>
     </form>
     <hr>
+    <h2>Edit note here(using rest api)</h2>
+    <form method="post" action="/editnote">
+        <label>Note ID:</label>
+        <input type="text" name="noteId">
+        <br>
+        <button type="submit">SUBMIT</button>
+        <button type="reset">RESET</button>
+    </form>
+    <hr>
 </body>
 
 </html>
