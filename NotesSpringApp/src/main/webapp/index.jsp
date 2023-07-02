@@ -77,6 +77,15 @@
         <button type="reset">RESET</button>
     </form>
     <hr>
+    <h2>Delete note here(using rest api)</h2>
+    <form method="post" action="/deletenote">
+        <label>Note ID:</label>
+        <input type="text" name="noteId">
+        <br>
+        <button type="submit">SUBMIT</button>
+        <button type="reset">RESET</button>
+    </form>
+    <hr>
 </body>
 
 </html>

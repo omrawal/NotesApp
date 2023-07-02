@@ -86,7 +86,7 @@ public class NoteAppController {
 		
 		// use request param
 		
-		System.out.println("->>>>>>"+noteId);
+		System.out.println("edit ->>>>>>"+noteId);
 		String responseString="No user found";
 		if(noteDao.existsById(noteId)) {
 			responseString=noteDao.getById(noteId).toString();
@@ -98,8 +98,22 @@ public class NoteAppController {
 			System.out.println("Note not found");
 			return "editnote.jsp";
 		}
-		
-		
 	}
-
+	
+	@RequestMapping("/deletenote")
+	@ResponseBody
+	public String deleteNotePage(@RequestParam("noteId") int noteId,Model model) {
+		// use request param
+		System.out.println("delete ->>>>>>"+noteId);
+		if(noteDao.existsById(noteId)) {
+			noteDao.deleteById(noteId);
+			return "Note deleted Successfully";
+		}
+		else{
+			System.out.println("Note not found");
+			return "Note Not Found";
+		}
+	}
+	
+	
 }
